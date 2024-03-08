@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="menu">
+            <input type="button" class="menu__button" value="New" id="new_btn">
+            <input type="button" class="menu__button" value="Save" id="quicksave_btn"/>
+            <input type="button" class="menu__button" value="Close" id="close_btn"/>
+        </div>
+        <div class="content">
+            <div class="wrapper">
+                <div class="explorer">
+
+                    <div class="explorer-container">
+                        <ul id="folders_list">
+                        </ul>
+                    </div>
+                </div>
+                <div class="table-editor">
+                    <div class="control-panel">
+                        <input type="button" value="Add" id="add_btn" class="control-btn"/>
+                    </div>
+                    <table id="main_table">
+                        <thead>
+                            <tr>
+                                <th>ФИО</th>
+                                <th>Возраст</th>
+                                <th>Пол</th>
+                                <th>Группа</th>
+                                <th>Курс</th>
+                                <th>Оценка</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="./controller.js"></script>
+</body>
+</html>
