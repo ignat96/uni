@@ -6,6 +6,7 @@ class View {
         // init HTMLElement references
         this.table = document.querySelector("#main_table>tbody")
         this.folders_list = document.querySelector("#folders_list")
+        this.new_button = document.getElementById("new_btn")
         this.close_button = document.getElementById("close_btn")
         this.add_button = document.getElementById("add_btn")
         this.qsave_button = document.getElementById("quicksave_btn")
@@ -68,12 +69,7 @@ class View {
             const target = event.target
             if (target.tagName === "LI") {
                 let item = this.folder_items.find((value, index) => target.innerText === value['name'])
-                if (item['type'] === 'd')
-                    handler(item['name'], 'd')
-                // pywebview.api.open_folder(item['name']).then(this.render_list)
-                else
-                    handler(item['path'], 'p')
-                // pywebview.api.open_file(item['path']).then(this.read)
+                handler(item['name'], 'p')  
             }
         }, false)
     }
@@ -92,7 +88,6 @@ class View {
             handler(_table)
         }, false)
     }
-
 }
 
 class Controller {
@@ -113,8 +108,8 @@ class Controller {
 
     // Event handlers
     handle_open_folder = (value, _type) => {
-        if (_type === 'd') {}
-            // this.model.open_folder(value).then(data => this.view.render_list(data), false)
+        if (_type === 'd')
+            this.model.open_folder(value).then(data => this.view.render_list(data), false)
         else
             this.model.open_file(value).then(data => this.view.print_table(data), false)
     }
@@ -140,11 +135,7 @@ class Controller {
         this.model.save_file(JSON.stringify(data))
     }
 
-    handle_back_click = () => {
-        // this.model.open_folder("", "back").then(
-        //     (data) => this.view.render_list(data)
-        // )
-    }
+
 
     // Other funcs
     new_alert(code, desc){

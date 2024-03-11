@@ -21,7 +21,7 @@ def main():
     server.max_cons_per_ip = 2
 
     logging.basicConfig(filename='./pyftpd.log', level=logging.INFO)
-    print('sdfdsf')
+    print('Server ready for working')
     server.serve_forever()
 
 
