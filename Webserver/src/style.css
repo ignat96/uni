@@ -1,0 +1,157 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    background: linear-gradient(to bottom, #ddd6f3, #faaca8) no-repeat;
+    font-family: monospace;
+    font-size: 12pt;
+    color: rgb(28, 28, 93);
+}
+
+th,td{
+    border: 1px solid rgb(160 160 160);
+    width: auto;
+    padding: 8px 10px;
+}
+
+#main_table{
+    border-collapse: collapse;
+    /*border: 2px solid rgb(140 140 140);*/
+    font-family: sans-serif;
+    font-size: .8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    width: 100%;
+}
+
+ul{
+    list-style: none;
+}
+
+input[type="button"]{
+    display: block;
+    font-family: monospace;
+    font-size: 12pt;
+    color: rgb(28, 28, 93);
+}
+
+ul>li{
+    border-radius: 5px;
+    line-height: 36px;
+    padding: 2px 10px;
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+li:hover{
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.menu{
+    background-color: #ddd6f3;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    padding: 3px 4px;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+
+.menu__button{
+    background-color: #ddd6f3;
+    border-color: transparent;
+    border-radius: 5px;
+    min-width: 80px;
+}
+
+.menu__button:hover{
+    background-color: #c4bed7;
+}
+
+.menu__button:active{
+    background-color: #aaa5bb;
+}
+
+.container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+}
+
+.content{
+    height: calc(100vh - 35px);
+
+}
+
+.wrapper{
+    height: 100%;
+    padding: 12px 10px;
+    display: grid;
+    grid-template-columns: 20% 2fr;
+    gap: 10px;
+}
+
+.table-editor, .explorer{
+    background-color: rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.explorer{
+    align-items: center;
+}
+
+.table-editor{
+    align-items: start;
+}
+
+.control-btn {
+    border-radius: 5px;
+    border-width: 0;
+    border-color: #c4bed7;
+    background-color: rgba(0, 0, 0, 0.12);
+    min-height: 36px;
+    max-height: 96px;
+    min-width: 60px;
+}
+
+#back_btn{
+    width: 65%;
+}
+
+.control-btn:hover{
+    background-color: rgba(0, 0, 0, 0.20);
+}
+
+.control-btn:active{
+    background-color: rgba(0, 0, 0, 0.30);
+}
+
+.explorer-container{
+    width: 100%;
+    scrollbar-color: rgb(28, 28, 93) transparent;
+    scrollbar-width: thin;
+}
+
+.explorer-container, #main_table{
+    overflow: auto;
+}
+
+.control-panel{
+    padding: 0 25px;
+}
