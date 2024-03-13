@@ -2,6 +2,7 @@ class View {
     constructor() {
         // init fields
         this.folder_items = {}
+        this.clicked_item = {}
 
         // init HTMLElement references
         this.table = document.querySelector("#main_table>tbody")
@@ -68,13 +69,9 @@ class View {
         this.folders_list.addEventListener('dblclick', (event) => {
             const target = event.target
             if (target.tagName === "LI") {
+                this.clicked_item = target
                 let item = this.folder_items.find((value, index) => target.innerText === value['name'])
-                if (item['type'] === 'd')
-                    handler(item['name'], 'd')
-                // pywebview.api.open_folder(item['name']).then(this.render_list)
-                else
-                    handler(item['path'], 'p')
-                // pywebview.api.open_file(item['path']).then(this.read)
+                handler(item['name'])
             }
         }, false)
     }
@@ -90,7 +87,8 @@ class View {
         this.qsave_button.addEventListener('mousedown', (event) => {
             event.preventDefault()
             let _table = document.querySelector("#main_table")
-            handler(_table)
+            
+            handler(_table, this.clicked_item.innerText)
         }, false)
     }
 
@@ -110,28 +108,30 @@ class Controller {
         // Bind events & handlers
         this.view.bind_add_click(() => this.view.add_row())
         this.view.bind_close_click(this.handle_close_file)
-        // this.view.bind_folder_click(this.handle_open_folder)
-        // this.view.bind_save_click(this.handle_save_file)
+        this.view.bind_folder_click(this.handle_open_folder)
+        this.view.bind_save_click(this.handle_save_file)
         // this.view.bind_back_click(this.handle_back_click)
 
         // init explorer panel
-        fetch('/file_api/list').then(data => data.json()).then(data => this.view.render_list(data))
+        fetch('/file_api/list')
+        .then(data => data.json())
+        .then(data => this.view.render_list(data))
     }
 
 
     // Event handlers
-    handle_open_folder = (value, _type) => {
-        if (_type === 'd')
-            {}
-        else
-            {}
+    handle_open_folder = (value) => {
+        fetch(`/file_api/get/${value}`)
+        .then(data => data.json())
+        .then(data => this.view.print_table(data))
     }
+
 
     handle_close_file = () => {
         this.view.clear_table()
     }
 
-    handle_save_file = (el) => {
+    handle_save_file = (el, name) => {
         let data = []
         for (var i = 1; i < el.rows.length; i++) {
             let table_row = el.rows[i];
@@ -145,14 +145,22 @@ class Controller {
             }
             data.push(p);
         }
-        this.model.save_file(JSON.stringify(data))
+
+        let request = {
+            file_name: name,
+            data: data
+        }
+
+        fetch(('/file_api/upload'), {
+            method: 'POST', 
+            body: JSON.stringify(request),
+            headers:{
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        })
     }
 
-    handle_back_click = () => {
-        this.model.open_folder("", "back").then(
-            (data) => this.view.render_list(data)
-        )
-    }
+
 
     // Other funcs
     new_alert(code, desc){

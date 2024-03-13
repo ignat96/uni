@@ -8,7 +8,7 @@ from pyftpdlib.servers import ThreadedFTPServer
 def main():
     auth = DummyAuthorizer()
 
-    auth.add_user('sensor', '12345', r'F:\Projects\Uni\uni\Examples', perm='elradfmwMT')
+    auth.add_user('sensor', '12345', r'D:\ProjectForTests\Uni\Examples', perm='elradfmwMT')
 
     handler = FTPHandler
     handler.authorizer = auth

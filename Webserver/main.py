@@ -1,6 +1,7 @@
 import os
 import json
-from bottle import route, run, static_file, template, request
+from bottle import run, static_file, template, request
+from bottle import route, post, get
 
 FILE_SHARE_DIR = '../Examples/web/'
 
@@ -26,12 +27,21 @@ def get_files_list():
         })
     return json.dumps(data)
 
-@route('/file_api/get', method='GET')
-def get_file_data():
-    pass
 
-@route('/file_api/upload', method='POST')
+@get('/file_api/get/<file_name>')
+def get_file_data(file_name):
+    data = {}
+    with open(FILE_SHARE_DIR+file_name, mode='r', encoding='utf-8') as fp:
+        data = fp.read()
+    
+    return json.dumps(data)
+
+
+@post('/file_api/upload')
 def upload_file_data():
-    pass
+    data = request.json
+
+    with open(FILE_SHARE_DIR+data['file_name'], mode='w+', encoding='utf-8') as fp:
+        fp.write(json.dumps(data['data']))
 
 run(host='127.0.0.1', reloader=True)

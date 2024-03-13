@@ -14,7 +14,7 @@ class MainModel:
 
     def __init__(self):
         self.__ftp_con = FTP('127.0.0.1')
-        self.__ftp_con.port = 19881
+        self.__ftp_con.port = 21
         self.__ftp_con.login(user='sensor', passwd='12345')
 
         os.mkdir("./temp")
