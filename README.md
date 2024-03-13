@@ -3,3 +3,5 @@ Includes 4 architecture:
 2. FTP
 3. Client-Server
 4. Web
+
+Support opening, editing and saving .uni files
